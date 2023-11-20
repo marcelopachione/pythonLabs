@@ -27,7 +27,7 @@ def conn_postgres():
             port=postgres_port,
         )
 
-        # logging.info('Postgres server connection is successful')
+        logging.info("Postgres server connection is successful")
 
         return conn
 
@@ -35,6 +35,12 @@ def conn_postgres():
         traceback.print_exc()
         logging.error("Couldn't create the Postgres connection")
         return None
+
+
+"""
+Downloads the csv file from the URL. Creates a new table in the Postgres server.
+Reads the file as a dataframe and inserts each record to the Postgres table. 
+"""
 
 
 def download_file_from_url(url: str, dest_folder: str):
@@ -93,9 +99,9 @@ def write_to_postgres():
     try:
         df = pd.read_csv(f"{dest_folder}/churn_modelling.csv")
         inserted_row_count = 0
-        logging.info(f" Datafrane was loaded...")
+        logging.info(f" Dataframe was loaded...")
     except Exception as e:
-        logging.error(" Dataframe wasnt load. Error: {}".format(e))
+        logging.error(" Dataframe was not load. Error: {}".format(e))
         traceback.print_exc()
         exit()
 
